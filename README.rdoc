@@ -1,5 +1,0 @@
-== README
-
-This is the sample application (sample_app) from the Ruby on Rails tutorial.
-
-<tt>rake doc:app</tt>.
