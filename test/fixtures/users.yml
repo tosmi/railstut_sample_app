@@ -3,3 +3,7 @@ max:
   name: Max Mustermann
   email: max@mustermann.at
   password_digest: <%= User.digest('password') %>
+moritz:
+  name: Moritz Musterfrau
+  email: moritz@musterfrau.at
+  password_digest: <%= User.digest('password') %>
