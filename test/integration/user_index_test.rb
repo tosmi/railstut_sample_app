@@ -24,4 +24,25 @@ class UserIndexTest < ActionDispatch::IntegrationTest
       delete user_path(@non_admin)
     end
   end
+
+  test "index only shows activated users" do
+    log_in_as(@non_admin)
+    get users_path
+    # is archer here
+    assert_select 'a[href=?]', user_path(@non_admin), text: 'Sterling Archer'
+    @non_admin.update_attribute(:activated, false)
+    get users_path
+    assert_select 'a[href=?]', user_path(@non_admin), text: 'Sterling Archer', :count => 0
+    # restore old setting
+    @non_admin.update_attribute(:activated, true)
+  end
+
+  test "Profile page redirects to root_url if user is not activated" do
+    log_in_as(@non_admin)
+    @non_admin.update_attribute(:activated, false)
+    get user_path(@non_admin)
+    assert_redirected_to root_url
+    @non_admin.update_attribute(:activated, true)
+  end
+
 end
