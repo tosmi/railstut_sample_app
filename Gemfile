@@ -17,7 +17,7 @@ gem 'bootstrap-will_paginate', '0.0.10'
 
 group :development, :test do
   gem 'spring'
-  gem 'web-console'
+  gem 'web-console', '~> 2.0'
   gem 'sqlite3'
   gem 'byebug', '3.5.1'
 end
