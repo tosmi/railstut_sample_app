@@ -2,11 +2,12 @@ class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
 
   def create
-    @micropost = current_user.micropost.build(micropost_params)
+    @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       flash[:sucess] = "Micropost saved!"
       redirect_to root_url
     else
+      @feed_items = current_user.feed.paginate(page: params[:page])
       render 'static_pages/home'
     end
   end
